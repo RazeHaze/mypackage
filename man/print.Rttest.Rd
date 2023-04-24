@@ -21,5 +21,5 @@ print.Rttest
 defines the print method for the Rttest class
 }
 \examples{
-set.seed(20); print(myttest(rnorm(30,5,2), rnorm(30,3,2,), .05, FALSE))
+set.seed(20); print(myttest(rnorm(30,5,2), rnorm(30,3,2), .05, FALSE))
 }

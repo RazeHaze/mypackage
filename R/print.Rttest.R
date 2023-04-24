@@ -22,5 +22,6 @@ print.Rttest = function(list) {
                       alpha = list$alpha,
                       reject = list$reject)
   print_output
+  UseMethod("print.Rttest")
 }
 

@@ -5,6 +5,8 @@
 #' @param alpha #alpha value for t.test
 #' @param paired #use paired = TRUE for paired t.test, paired = FALSE for unpaired t.test
 #'
+#' @import stats
+#'
 #' @return returns a list of length 6: a data frame of x and y,
 #' a confidence interval of the t.test, the type of test used,
 #' p.value of the t.test, a rejection statement,

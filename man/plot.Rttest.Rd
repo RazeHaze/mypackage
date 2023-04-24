@@ -9,7 +9,7 @@
 \arguments{
 \item{w}{output of myttest function}
 
-\item{...}{additional ggplot parameters if desired}
+\item{...}{additional parameters}
 }
 \value{
 ggplot2 boxplot of the dataframe, differs depending on t.test used
@@ -18,5 +18,5 @@ ggplot2 boxplot of the dataframe, differs depending on t.test used
 plot.Rttest
 }
 \examples{
-set.seed(20); plot(myttest(rnorm(30,5,2), rnorm(30,3,2,), .05, FALSE))
+set.seed(20); plot(myttest(rnorm(30,5,2), rnorm(30,3,2), .05, FALSE))
 }
