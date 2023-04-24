@@ -1,0 +1,12 @@
+Package: mypackage
+Type: Package
+Title: Example Package for DSA
+Version: 0.1.0
+Author: Cayman Matson
+Maintainer: The package maintainer <cayman.t.matson-1@ou.edu>
+Description: Includes t.test function (myttest) designed to perform a 
+    variety of t.tests on two sets of data; exports to list of class Rttest. 
+    Also includes a print and plot method for the data from myttest.
+License: My driver's license ;)
+Encoding: UTF-8
+LazyData: true
