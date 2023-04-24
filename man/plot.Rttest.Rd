@@ -4,10 +4,10 @@
 \alias{plot.Rttest}
 \title{plot.Rttest}
 \usage{
-\method{plot}{Rttest}(w, ...)
+\method{plot}{Rttest}(x, ...)
 }
 \arguments{
-\item{w}{output of myttest function}
+\item{x}{output of myttest function}
 
 \item{...}{additional parameters}
 }

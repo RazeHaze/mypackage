@@ -7,7 +7,7 @@ Maintainer: The package maintainer <cayman.t.matson-1@ou.edu>
 Description: Includes t.test function (myttest) designed to perform a 
     variety of t.tests on two sets of data; exports to list of class Rttest. 
     Also includes a print and plot method for the data from myttest.
-License: none
+License: MIT + file LICENSE
 Depends: kableExtra, ggplot2, stats
 Encoding: UTF-8
 LazyData: true

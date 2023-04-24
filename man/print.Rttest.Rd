@@ -5,10 +5,12 @@
 \title{print.Rttest
 defines the print method for the Rttest class}
 \usage{
-\method{print}{Rttest}(list)
+\method{print}{Rttest}(x, ...)
 }
 \arguments{
-\item{list}{#the output of the myttest function}
+\item{x}{#the output of the myttest function}
+
+\item{...}{add. parameters}
 }
 \value{
 returns a list of length 6: kable table of x and y
