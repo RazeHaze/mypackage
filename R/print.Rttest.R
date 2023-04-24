@@ -9,11 +9,11 @@
 #' a confidence interval of the t.test, the type of test used,
 #' p.value of the t.test, a rejection statement,
 #' and the alpha value used.
-#' @importFrom kable kable
+#' @import kableExtra
 #'
 #' @export
 #'
-#' @examples set.seed(20); print(myttest(rnorm(30,5,2), rnorm(30,3,2,), .05, FALSE))
+#' @examples set.seed(20); print(myttest(rnorm(30,5,2), rnorm(30,3,2), .05, FALSE))
 print.Rttest = function(list) {
   print_output = list(kable.table = kable(list$data.frame),
                       confidence.interval = list$confidence.interval,
