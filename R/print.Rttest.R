@@ -1,17 +1,24 @@
 
 #' print.Rttest
-#' defines the print method for the Rttest class
+#'
+#'
+#' @description
+#'  Defines the print method for the Rttest class. Use only with output from
+#'  myttest.
 #'
 #' @param x #the output of the myttest function
-#' @param ... add. parameters
+#' @param ... additional parameters to make print generic happy
 #'
 #'
 #' @return returns a list of length 6: kable table of x and y
 #' a confidence interval of the t.test, the type of test used,
 #' p.value of the t.test, a rejection statement,
 #' and the alpha value used.
+#'
 #' @import kableExtra
+#'
 #' @method print Rttest
+#'
 #' @export
 #'
 #' @examples set.seed(20); print(myttest(rnorm(30,5,2), rnorm(30,3,2), .05, FALSE))

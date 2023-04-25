@@ -1,8 +1,12 @@
 
 #' plot.Rttest
 #'
-#' @param x
-#' @param ...
+#' @description
+#'  Defines the plot method for the Rttest class. Use only with output from
+#'  myttest. Plots two plots for unpaired data, and one plot for paired data.
+#'
+#' @param x The output from myttest
+#' @param ... Additional parameters to make plot generic happy
 #'
 #' @return returns boxplots of myttest's output list;
 #'          side by side boxplots for unpaired data, or a single boxplot of the
@@ -14,10 +18,13 @@
 #' @import purrr
 #' @import reshape2
 #'
+#' @method plot Rttest
+#'
 #' @export
 #'
 #' @examples set.seed(20); plot(myttest(rnorm(30,5,2), rnorm(30,3,2), .05, FALSE))
   plot.Rttest = function(x, ...) {
+    obj = x.data.frame.df.x...x.data.frame.df.y = variable = value = 0
 
 ### creates plots for paired tests
     if (x$test_type == "Paired") {

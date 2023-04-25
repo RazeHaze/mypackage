@@ -2,15 +2,14 @@
 % Please edit documentation in R/print.Rttest.R
 \name{print.Rttest}
 \alias{print.Rttest}
-\title{print.Rttest
-defines the print method for the Rttest class}
+\title{print.Rttest}
 \usage{
 \method{print}{Rttest}(x, ...)
 }
 \arguments{
 \item{x}{#the output of the myttest function}
 
-\item{...}{add. parameters}
+\item{...}{additional parameters to make print generic happy}
 }
 \value{
 returns a list of length 6: kable table of x and y
@@ -19,8 +18,8 @@ p.value of the t.test, a rejection statement,
 and the alpha value used.
 }
 \description{
-print.Rttest
-defines the print method for the Rttest class
+Defines the print method for the Rttest class. Use only with output from
+ myttest.
 }
 \examples{
 set.seed(20); print(myttest(rnorm(30,5,2), rnorm(30,3,2), .05, FALSE))

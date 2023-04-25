@@ -7,15 +7,18 @@
 \method{plot}{Rttest}(x, ...)
 }
 \arguments{
-\item{x}{output of myttest function}
+\item{x}{The output from myttest}
 
-\item{...}{additional parameters}
+\item{...}{Additional parameters to make plot generic happy}
 }
 \value{
-ggplot2 boxplot of the dataframe, differs depending on t.test used
+returns boxplots of myttest's output list;
+         side by side boxplots for unpaired data, or a single boxplot of the
+         difference in x and y for paired data, includes confidence interval.
 }
 \description{
-plot.Rttest
+Defines the plot method for the Rttest class. Use only with output from
+ myttest. Plots two plots for unpaired data, and one plot for paired data.
 }
 \examples{
 set.seed(20); plot(myttest(rnorm(30,5,2), rnorm(30,3,2), .05, FALSE))
