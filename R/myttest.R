@@ -1,5 +1,11 @@
 #' myttest
 #'
+#' @description an example function for DSA 5041. Given two data sets,
+#'  performs a ttest, either Student's, Welch, or Paired, depending on the data.
+#'  Outputs a list of Rttest, use print.Rttest or plot.Rttest to display the
+#'  output more cleanly.
+#'
+#'
 #' @param x #first list of data
 #' @param y #second list of data
 #' @param alpha #alpha value for t.test
@@ -8,9 +14,9 @@
 #' @import stats
 #'
 #' @return returns a list of length 6: a data frame of x and y,
-#' a confidence interval of the t.test, the type of test used,
-#' p.value of the t.test, a rejection statement,
-#' and the alpha value used. Class is Rttest.
+#'  a confidence interval of the t.test, the type of test used,
+#'  p.value of the t.test, a rejection statement,
+#'  and the alpha value used. Class is Rttest.
 #'
 #' @export
 #'
