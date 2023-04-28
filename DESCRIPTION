@@ -8,7 +8,11 @@ Description: Includes t.test function (myttest) designed to perform a
     variety of t.tests on two sets of data; exports to list of class Rttest. 
     Also includes a print and plot method for the data from myttest.
 License: MIT + file LICENSE
-Depends: kableExtra, ggplot2, stats, purrr, reshape2
+Depends: kableExtra, ggplot2, stats, purrr, reshape2, shiny
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.2.3
+Suggests: 
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr
