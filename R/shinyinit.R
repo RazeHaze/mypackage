@@ -1,5 +1,4 @@
 
-
 #' shinyinit
 #'  @description
 #'  Starts an example shiny server in the browser. This is designed to show off
@@ -9,9 +8,13 @@
 #' @return starts the shiny example for mypackage
 #' @export
 #'
+#' @import shiny
+#'
 #' @examples
 #' \dontrun{shinyinit()}
-shinyinit() = function()
+#'
+
+shinyinit = function()
 {
   shiny::runApp(system.file("shiny-1", package =
                             "mypackage"), launch.browser = TRUE)

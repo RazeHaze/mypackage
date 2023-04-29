@@ -16,7 +16,8 @@ knitr::opts_chunk$set(
 
 Hello! welcome to mypackage, a demo package for DSA 5041. It consists of a 
 custom t.test function and a few s3 methods for displaying the results more
-cleanly. There is also a fun shiny server included!
+cleanly. There is also a fun shiny server included, which can be accessed with
+the function shinyinit().
 
 The primary function is myttest, which creates a list of class "Rttest".
 The other two functions, print.Rttest and plot.Rttest, serve to output the data
