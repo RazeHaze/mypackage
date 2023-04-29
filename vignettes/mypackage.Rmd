@@ -7,13 +7,198 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-```{r, include = FALSE}
+```{r, include = FALSE, warning=FALSE, message=FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
 ```
 
-```{r setup}
+Hello! welcome to mypackage, a demo package for DSA 5041. It consists of a 
+custom t.test function and a few s3 methods for displaying the results more
+cleanly. There is also a fun shiny server included!
+
+The primary function is myttest, which creates a list of class "Rttest".
+The other two functions, print.Rttest and plot.Rttest, serve to output the data
+from myttest in a legible and useful way. 
+
+```{r setup, warning=FALSE, message=FALSE}
 library(mypackage)
+```
+
+Firstly, the main function myttest. Given two data sets, performs a t.test, 
+either Student's, Welch, or Paired, depending on the data. 
+
+Outputs a list of class Rttest. The list includes, in order, a data frame of x and y, 
+a confidence interval of the t.test, the type of test used, 
+p.value of the t.test, a rejection statement, and the alpha value used.
+
+```{r myttest code, warning=FALSE, message=FALSE} 
+
+myttest = function(x, y, alpha, paired) {
+
+###Creates data frame from x and y
+  df = data.frame(df.x = x, df.y = y)
+
+### Determines which t.test to use based on equality of variance
+  varx = var(x)
+  vary = var(y)
+
+  #If test are paired, runs the paired t.test
+  if (paired == TRUE) {
+    test_type = "Paired"
+    t.vals = t.test(x,y, paired = TRUE, conf.level = 1 - alpha)
+  }
+
+  #If variances of x and y are equal and unpaired, runs a student's t.test
+  else if (varx == vary) {
+    test_type = "Student's"
+    t.vals = t.test(x,y, var.equal = TRUE, conf.level = 1 - alpha)
+  }
+
+  #If variances are not equal and unpaired, runs welch test
+  else {
+    test_type = "Welch"
+    t.vals = t.test(x,y, var.equal = FALSE, conf.level = 1 - alpha)
+  }
+
+### Determines if null hypothesis is rejected
+  if (is.na(t.vals$p.value) == TRUE) {
+    reject = "P-value is NaN, you might have an issue with your data."
+  }
+  else if(t.vals$p.value <= alpha) {
+    reject = "T.test indicates that you should reject the Null."
+  }
+  else if (t.vals$p.value > alpha) {
+    reject = "T.test indicates that you should *not* reject the Null."
+  }
+
+### Creates confidence interval
+  CI = c(t.vals$conf.int[1],t.vals$conf.int[2])
+
+### Creates P value
+  p.val = t.vals$p.value
+
+### Compiles everything into a list
+  output_list = list(data.frame = df,
+                     confidence.interval = CI,
+                     test_type = test_type,
+                     p.value = p.val,
+                     reject = reject,
+                     alpha = alpha)
+
+### Sets custom class Rttest
+  class(output_list) = "Rttest"
+
+  output_list
+}
+
+```
+
+Next, print.Rttest. This is a method of printing the results from myttest. It
+returns a list of length 6: the kable table of x and y, 
+a confidence interval of the t.test, the type of test used, 
+the p.value of the t.test, a rejection statement, and the alpha value used.
+
+```{r print.Rttest code, warning=FALSE, message=FALSE}
+
+print.Rttest = function(x, ...) {
+#kable is broken inside rmarkdown functions for some reason, so it outputs a raw html table. Sorry.
+  print_output = list(kable.table = kable(x$data.frame), 
+                      confidence.interval = x$confidence.interval, 
+                      test_type = x$test_type, 
+                      p.value = x$p.value,
+                      alpha = x$alpha,
+                      reject = x$reject)
+  print_output
+}
+
+
+```
+
+Lastly, plot.Rttest. This function defines the plot method for myttest. 
+Depending on if the data is set as paired or not, the function will return one 
+of two varieties of boxplots. For unpaired data, it returns side by side 
+boxplots or a single boxplot of the difference in x and y for paired data. The 
+paired data also includes the confidence interval on top of the graph.
+
+```{r plot.Rttest code, warning=FALSE, message=FALSE}
+
+plot.Rttest = function(x, ...) {
+    obj = x.data.frame.df.x...x.data.frame.df.y = variable = value = 0
+
+    ### creates plots for paired tests
+    if (x$test_type == "Paired") {
+      
+      #uses purrr::map to round the CI list, for printing on the graph
+      mapped = purrr::map(x[2], function(CI) round(CI,3))
+      CI.list = c(as.character(mapped[[1]][1]), as.character(mapped[[1]][2]))
+      confidence.interval.print = paste(CI.list, collapse = ", ")
+
+      #creates a single plot of the difference of x and y
+      paired_df = data.frame(x$data.frame$df.x - x$data.frame$df.y)
+      plot = ggplot(paired_df, aes(y = x.data.frame.df.x...x.data.frame.df.y)) +
+              geom_boxplot() +
+              labs(x = "Difference of samples x and y", y = "values") +
+              annotate("text", x = 0, y = 5, label = confidence.interval.print[1])
+    }
+    
+    ### creates plots for unpaired tests
+    else {
+      #uses reshape2's melt to create the data frame for side-by-side plots
+      long_df = reshape2::melt(x$data.frame) 
+
+      plot = ggplot(long_df, aes(x = variable, y = value)) +
+              geom_boxplot() +
+              labs(x = "Samples x and y")
+    }
+
+    plot #outputs the plot
+    }
+
+
+
+```
+
+
+And now, some examples for all the different cases. Warning, kable is kinda
+broken for some reason; everywhere I looked had different reasons for why and 
+different fixes, but nothing quite worked. Enjoy a bunch of raw html table data.
+
+```{r function demo 1, warning=FALSE, message=FALSE}
+
+set.seed(32); x=rnorm(30,mean=10,sd=15)
+set.seed(35); y=rnorm(30,mean=8,sd=15)
+ans1=mypackage::myttest(x,y,alpha=0.05,paired=FALSE)
+print(ans1)
+plot(ans1)
+
+
+```
+
+
+
+```{r functions demo 2, warning=FALSE, message=FALSE}
+
+
+set.seed(32); x=rnorm(30,mean=10,sd=5)
+set.seed(35); y=rnorm(30,mean=8,sd=15)
+ans2=mypackage::myttest(x,y,alpha=0.05,paired=FALSE)
+print(ans2)
+plot(ans2)
+
+
+```
+
+
+
+```{r functions demo 3, warning=FALSE, message=FALSE}
+
+set.seed(32); x=rnorm(30,mean=10,sd=15)
+set.seed(35); y = x+ rnorm(30, 5 ,4)
+ans3=mypackage::myttest(x,y,alpha=0.05,paired=TRUE)
+print(ans3)
+plot(ans3)
+
+
 ```

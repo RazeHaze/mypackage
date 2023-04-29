@@ -1,12 +1,13 @@
 Package: mypackage
 Type: Package
-Title: Example Package for DSA
+Title: Example Package for DSA 5041
 Version: 0.1.0
 Author: Cayman Matson
 Maintainer: The package maintainer <cayman.t.matson-1@ou.edu>
 Description: Includes t.test function (myttest) designed to perform a 
     variety of t.tests on two sets of data; exports to list of class Rttest. 
-    Also includes a print and plot method for the data from myttest.
+    Also includes a print and plot method for the data from myttest. A shiny
+    server and vingette are included to help get an idea of the package.
 License: MIT + file LICENSE
 Depends: kableExtra, ggplot2, stats, purrr, reshape2, shiny
 Encoding: UTF-8
